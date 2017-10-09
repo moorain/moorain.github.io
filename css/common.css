@@ -1,5 +1,5 @@
 /** 清除内外边距 **/
-body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,
+h1,h2,h3,h4,h5,h6,hr,p,blockquote,
 /* structural elements 结构元素 */
 dl,dt,dd,ul,ol,li,
 /* list elements 列表元素 */
@@ -12,6 +12,10 @@ th,td
 {
 	margin: 0;
 	padding: 0;
+}
+body{
+	padding: 0;
+	margin: 0;
 }
 /** 设置默认字体 **/
 body,button,input,select,textarea
@@ -81,15 +85,17 @@ table {
         color: #333;
         font-weight: bold;
         font-size: 1rem;
-        padding-left: 0.2rem;
+    }
+    .title p{
+    	padding-left: 0.2rem;
     }
     #nav{
     	width: 100%;
-    	padding-left: 0.2rem;
     	background: red;
     }
     #nav ul{
     	height: 1rem;
+    	padding-left: 0.2rem;
     }
     #nav ul li{
     	float: left;
