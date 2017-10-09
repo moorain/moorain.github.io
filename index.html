@@ -3,44 +3,82 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<script>!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}([function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=window;t["default"]=i.flex=function(normal,e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&&parseInt(l[1].split(".").join(""),10)>=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&&d[1]>534||c||(s=1);var u=normal?1:1/s,m=r.querySelector('meta[name="viewport"]');m||(m=r.createElement("meta"),m.setAttribute("name","viewport"),r.head.appendChild(m)),m.setAttribute("content","width=device-width,user-scalable=no,initial-scale="+u+",maximum-scale="+u+",minimum-scale="+u),r.documentElement.style.fontSize=normal?"50px": a/2*s*n+"px"},e.exports=t["default"]}]);  flex(false,100, 1);</script>
 </head>
 <style>
-    p,body,h1{
+    p,body,h1,ul,li{
         padding: 0;
         margin: 0;
+    }
+    
+    li{
+    	list-style: none;
+    }
+    h1,h2,h3{
+    	font-size: 0.4rem;
+    }
+    a{
+    	color: black;
+    	text-decoration: none;
     }
     .wrapper{
         width: 100%;
     }
     .innerbox{
-    	width: 90%;
+    	width: 100%;
     	margin: 0 auto;
     }
     .title{
-    	margin-top: 2rem;
-        height: 4rem;
+    	margin-top: 0.5rem;
+        height: 2rem;
         background: green;
-        line-height: 4rem;
+        line-height: 2rem;
         color: white;
         font-weight: bold;
-        font-size: 2rem;
-        padding-left: 2rem;
+        font-size: 1rem;
+        padding-left: 0.5rem;
     }
     #nav{
-    	height: 2em;
+    	height: 1em;
     	background: red;
     }
     #nav ul li{
     	float: left;
-    	width: 4rem;
-    	padding: 0 1rem;
+    	width: 1rem;
+    	padding: 0 0.5rem;
     	list-style: none;
     	color: white;
-    	line-height: 2rem;
+    	line-height: 1rem;
+
     }
     #nav ul li a{
+    	display: block;
     	color: white;
     	text-decoration: none;
+        font-size: 0.5rem;
+        line-height: 1rem;
+    }
+    #content{
+    	border: 0.01rem solid red;
+    	width: 24rem;
+    	margin: 0.5rem auto;
+    }
+    #content ul li{
+    	border-bottom: 1px solid #ccc;
+    	width: 10rem;
+    	height: 2rem;
+    	font-size: 0.5rem;
+    	margin-bottom: 0.2rem;
+    	background: #CCCCCC;
+    	
+    }
+    #content ul li span{
+    	font-size: 0.2px;
+    }
+    #content ul li p{
+    	font-size: 0.3rem;
+    	text-indent: 0.6rem;
+    	height: 0.8rem;
     }
 </style>
 <body>
@@ -51,7 +89,31 @@
     	<ul>
     		<li><a href="">主页</a></li>
     		<li><a href="">记录</a></li>
-    		<li><a href="">关于作者</a></li>
+    		<li><a href="">关于</a></li>
+    	</ul>
+    </div>
+    <div id="content" class="innerbox">
+    	<ul>
+    		<li>
+    			<h1>关于网页的自适应问题</h1>
+    			<p>asdhaskdjhaskdhasjdh</p>
+    			<span>2017-12-13</span>
+    			<span>编辑：屈鑫</span>
+    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
+    			
+    		</li>
+    		<li>
+    			<h1>关于网页的自适应问题</h1>
+    			<p>asdhaskdjhaskdhasjdh</p>
+    		</li>
+    		<li>
+    			<h1>关于网页的自适应问题</h1>
+    			<p>asdhaskdjhaskdhasjdh</p>
+    		</li>
+    		<li>
+    			<h1>关于网页的自适应问题</h1>
+    			<p>asdhaskdjhaskdhasjdh</p>
+    		</li>
     	</ul>
     </div>
 </body>
