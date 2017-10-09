@@ -12,21 +12,47 @@
     .wrapper{
         width: 100%;
     }
-    .box1{
-        height: 2em;
+    .innerbox{
+    	width: 90%;
+    	margin: 0 auto;
+    }
+    .title{
+    	margin-top: 2rem;
+        height: 4rem;
         background: green;
-        text-align: center;
-        line-height: 2em;
+        line-height: 4rem;
         color: white;
         font-weight: bold;
-        font-size: 2em;
+        font-size: 2rem;
+        padding-left: 2rem;
+    }
+    #nav{
+    	height: 2em;
+    	background: red;
+    }
+    #nav ul li{
+    	float: left;
+    	width: 4rem;
+    	padding: 0 1rem;
+    	list-style: none;
+    	color: white;
+    	line-height: 2rem;
+    }
+    #nav ul li a{
+    	color: white;
+    	text-decoration: none;
     }
 </style>
 <body>
-    <div class="wrapper box1">
-      <p>这是标题!</p>    
+    <div class="wrapper title">
+      <p>Moorain</p>    
     </div>
-    <a href="contact.html">点击联系我</a>
-	<h1>这是我的博客</h1>
+    <div id="nav" class="innerbox">
+    	<ul>
+    		<li><a href="">主页</a></li>
+    		<li><a href="">记录</a></li>
+    		<li><a href="">关于作者</a></li>
+    	</ul>
+    </div>
 </body>
 </html>
