@@ -4,94 +4,60 @@
 	<meta charset="UTF-8">
 	<title>Moorain</title>
 	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	<script>!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}([function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=window;t["default"]=i.flex=function(normal,e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&&parseInt(l[1].split(".").join(""),10)>=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&&d[1]>534||c||(s=1);var u=normal?1:1/s,m=r.querySelector('meta[name="viewport"]');m||(m=r.createElement("meta"),m.setAttribute("name","viewport"),r.head.appendChild(m)),m.setAttribute("content","width=device-width,user-scalable=no,initial-scale="+u+",maximum-scale="+u+",minimum-scale="+u),r.documentElement.style.fontSize=normal?"50px": a/2*s*n+"px"},e.exports=t["default"]}]);  flex(false,100, 1);</script>
-	
 </head>
-<style>
-    #content{
-    	margin: 0.5rem 0;
-    	height: 20rem;
-    }
-    #content ul{
-    	padding-left: 0.2rem;
-    }
-    #content ul li{
-    	border-bottom: 1px solid #ccc;
-    	width: 100%;
-    	height: auto;
-    	font-size: 0.5rem;
-    	margin-bottom: 0.2rem;
-    	background: #CCCCCC;
-    }
-    #content ul li span{
-    	font-size: 0.3rem;
-    }
-    #content ul li p{
-    	width: 100%;
-    	height: 1rem;
-    	font-size: 0.3rem;
-    	text-indent: 0.6rem;
-    	overflow: hidden;
-    	word-break:break-all;
-    }
-</style>
 <body>
     <div class="wrapper title">
       <p>Moorain</p>    
     </div>
     <div id="nav" class="innerbox">
     	<ul>
-    		<li><a href="home.html">Home</a></li>
+    		<li><a href="index.html">Home</a></li>
     		<li><a href="life.html">Life</a></li>
     		<li><a href="lists.html">Lists</a></li>
     		<li><a href="contact.html">About</a></li>
     	</ul>
     </div>
+    <!--内容列表区开始-->
     <div id="content" class="innerbox">
     	<ul>
     		<li>
-    			<h1>1.关于网页的自适应问题</h1>
-    			<p>asdhaskdjhaskdhasjdasdasdsadh</p>
+    			<a href="list/list02-数组去重.html"><h1>1.数组去重的几种方式</h1>
+    				<p>本文收集了几种数组去重的方式，并成功测试。</p>
+    			</a>
     			<span>2017-12-13</span>
     			<span>编辑：屈鑫</span>
     			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
     		</li>
     		<li>
-    			<h1>1.关于网页的自适应问题</h1>
-    			<p>asdhaskdjhaskdhasjdasdasdsadh</p>
+    			<a href="list/list03-编译.html"><h1>2.你知道「编译」与「解释」的区别吗？</h1>
+    				<p>编译器是一种计算机程序，负责把一种编程语言编写的源码转换成另外一种计算机代码，后者往往是以二进制的形式被称为目标代码(object code)。</p>
+    			</a>
     			<span>2017-12-13</span>
     			<span>编辑：屈鑫</span>
     			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
     		</li>
     		<li>
-    			<h1>1.关于网页的自适应问题</h1>
-    			<p>asdhaskdjhaskdhasjdasdasdsadh</p>
+    			<a href="list/list04-闭包.html"><h1>2.闭包的理解</h1>
+    				<p>闭包是一种设计原则，它通过分析上下文，来简化用户的调用，让用户在不知晓的情况下，达到他的目的；</p>
+    			</a>
     			<span>2017-12-13</span>
     			<span>编辑：屈鑫</span>
     			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li>
-    		<li>
-    			<h1>1.关于网页的自适应问题</h1>
-    			<p>asdhaskdjhaskdhasjdasdasdsadh</p>
-    			<span>2017-12-13</span>
-    			<span>编辑：屈鑫</span>
-    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li>
-    		<li>
-    			<h1>1.关于网页的自适应问题</h1>
-    			<p>asdhaskdjhaskdhasjdasdasdsadh</p>
-    			<span>2017-12-13</span>
-    			<span>编辑：屈鑫</span>
-    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li>
-    		<li>
-    			<h1>1.关于网页的自适应问题</h1>
-    			<p>asdhaskdjhaskdhasjdasdasdsadh</p>
-    			<span>2017-12-13</span>
-    			<span>编辑：屈鑫</span>
-    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li>
+    		</li
     	</ul>
     </div>
+    <!--内容列表区结束-->
+    
+    <!--尾部-->
+    <div class="footer">
+    	<p> Design By Moorain</p>
+    </div>
+    <script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+
+    	
+    </script>
 </body>
 </html>
