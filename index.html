@@ -1,63 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Moorain</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css"/>
-	<link rel="stylesheet" type="text/css" href="css/index.css"/>
-	<script>!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}([function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=window;t["default"]=i.flex=function(normal,e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&&parseInt(l[1].split(".").join(""),10)>=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&&d[1]>534||c||(s=1);var u=normal?1:1/s,m=r.querySelector('meta[name="viewport"]');m||(m=r.createElement("meta"),m.setAttribute("name","viewport"),r.head.appendChild(m)),m.setAttribute("content","width=device-width,user-scalable=no,initial-scale="+u+",maximum-scale="+u+",minimum-scale="+u),r.documentElement.style.fontSize=normal?"50px": a/2*s*n+"px"},e.exports=t["default"]}]);  flex(false,100, 1);</script>
-</head>
-<body>
-    <div class="wrapper title">
-      <p>Moorain</p>    
-    </div>
-    <div id="nav" class="innerbox">
-    	<ul>
-    		<li><a href="index.html">Home</a></li>
-    		<li><a href="life.html">Life</a></li>
-    		<li><a href="lists.html">Lists</a></li>
-    		<li><a href="contact.html">About</a></li>
-    	</ul>
-    </div>
-    <!--内容列表区开始-->
-    <div id="content" class="innerbox">
-    	<ul>
-    		<li>
-    			<a href="list/list02-数组去重.html"><h1>1.数组去重的几种方式</h1>
-    				<p>本文收集了几种数组去重的方式，并成功测试。</p>
-    			</a>
-    			<span>2017-12-13</span>
-    			<span>编辑：屈鑫</span>
-    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li>
-    		<li>
-    			<a href="list/list03-编译.html"><h1>2.你知道「编译」与「解释」的区别吗？</h1>
-    				<p>编译器是一种计算机程序，负责把一种编程语言编写的源码转换成另外一种计算机代码，后者往往是以二进制的形式被称为目标代码(object code)。</p>
-    			</a>
-    			<span>2017-12-13</span>
-    			<span>编辑：屈鑫</span>
-    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li>
-    		<li>
-    			<a href="list/list04-闭包.html"><h1>2.闭包的理解</h1>
-    				<p>闭包是一种设计原则，它通过分析上下文，来简化用户的调用，让用户在不知晓的情况下，达到他的目的；</p>
-    			</a>
-    			<span>2017-12-13</span>
-    			<span>编辑：屈鑫</span>
-    			<span>个人博客:<a href="wwww.moorain.club">moorain</a></span>
-    		</li
-    	</ul>
-    </div>
-    <!--内容列表区结束-->
-    
-    <!--尾部-->
-    <div class="footer">
-    	<p> Design By Moorain</p>
-    </div>
-    <script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Moorain</title>
 
-    	
-    </script>
-</body>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->    
+    <style type="text/css">
+    	body,ul,li,p,h1,h2,h3,h4,h5{
+    		padding: 0;
+    		margin: 0;
+    	}
+    	body{
+    		padding-top: 50px;
+    	}
+    	#content{
+    		margin: 0;
+    	}
+    	#left_con{
+   			padding-left: 4em;
+    		padding-top: 50px;
+    		background: gainsboro;
+    	}
+    	#left_con li{
+    		list-style: none;
+    		margin-bottom: 20px;
+    		border-bottom: 1px solid #ccc;
+    	}
+    </style>
+  </head>
+  <body>
+<!-- 顶部导航开始 -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="menu-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Moorain</a>
+        </div>
+        <div class="navbar-collapse collapse">
+	            <ul class="nav navbar-nav">
+	                <li class="active"><a href="#ad-carousel">主页</a></li>
+	                <li><a href="#summary-container">博客</a></li>
+	                <!--子菜单-->
+	                <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类 <span class="caret"></span></a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li><a href="http://www.baidu.com" data-tab="tab-chrome">HTML/CSS</a></li>
+	                        <li><a href="#feature-tab" data-tab="tab-firefox">JavaScript</a></li>
+	                        <li><a href="#feature-tab" data-tab="tab-safari">实用工具</a></li>
+	                        <li><a href="#feature-tab" data-tab="tab-opera">其他</a></li>
+	                    </ul>
+	                </li>
+	                <li><a href="#" data-toggle="modal" data-target="#about-modal">关于</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+<!--顶部导航结束-->
+ 				<div class="row feature" id="content">
+                
+                <div class="col-md-9" id="left_con">
+										<ul>
+											<li>
+												<h4>数组去重的几种方式</h4>
+												<p>是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。</p>
+												<h6><span>时间：2017-10-10</span></h6>
+											</li>
+											<li>
+												<h4>数组去重的几种方式</h4>
+												<p>是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。</p>
+												<h6><span>时间：2017-10-10</span></h6>
+											</li>
+											<li>
+												<h4>数组去重的几种方式</h4>
+												<p>是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。</p>
+												<h6><span>时间：2017-10-10</span></h6>
+											</li>
+											<li>
+												<h4>数组去重的几种方式</h4>
+												<p>是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。</p>
+												<h6><span>时间：2017-10-10</span></h6>
+											</li>
+											<li>
+												<h4>数组去重的几种方式</h4>
+												<p>是跨平台浏览器可以在Windows、Mac和Linux三个操作系统平台上运行。</p>
+												<h6><span>时间：2017-10-10</span></h6>
+											</li>
+										</ul>
+										
+                    
+                </div>
+                <div class="col-md-3" id="right_con"> 
+										<p>日期</p>
+                </div>
+ 				</div>
+
+
+
+
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
