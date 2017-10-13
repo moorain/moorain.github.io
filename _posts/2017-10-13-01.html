@@ -1,0 +1,103 @@
+---
+layout: post
+title: 数组的几种去重方式
+category: JavaScript
+tags:  [JavaScript]
+excerpt: "数组的去重是经常见到的问题，本文收集了几种常见的数组去重的方式，遍历数组法、数组下标判断法、排序后相邻去除法"
+---
+<h2>{{ page.title }}</h2>
+<p class="zhai">摘要：数组的去重是经常见到的问题，本文收集了几种常见的数组去重的方式，遍历数组法、数组下标判断法、排序后相邻去除法</p>
+<!--<p>{{ page.date | date_to_string }}</p>-->
+<h3>1.遍历数组法</h3>
+	
+        最简单的去重方法， 实现思路：新建一新数组，遍历传入数组，值不在新数组就加入该新数组中；
+        注意点：判断值是否在数组的方法“indexOf”是ECMAScript5 方法，IE8以下不支持，
+        需多写一些兼容低版本浏览器代码，源码如下：
+		
+<pre>function unique1(array){
+var n = []; //一个新的临时数组
+//遍历当前数组
+for(var i = 0; i < array.length; i++){
+    //如果当前数组的第i已经保存进了临时数组，那么跳过，
+    //否则把当前项push到临时数组里面
+    if (n.indexOf(array[i]) == -1) n.push(array[i]);
+}
+return n;
+}
+		
+        
+         </pre>  
+         // 判断浏览器是否支持indexOf ，indexOf 为ecmaScript5新方法 IE8以下（包括IE8， IE8只支持部分ecma5）不支持
+         <pre>
+if (!Array.prototype.indexOf){
+    // 新增indexOf方法
+    Array.prototype.indexOf = function(item){
+        var result = -1, a_item = null;
+        if (this.length == 0){
+        return result;
+        }
+        for(var i = 0, len = this.length; i < len; i++){
+        a_item = this[i];
+        if (a_item === item){
+            result = i;
+            break;
+        }  
+        }
+        return result;
+    }
+}
+</pre>
+
+    <h3>3.数组下标判断法</h3>
+    还是得调用“indexOf”性能跟方法1差不多，实现思路：如果当前数组的第i项在当前数组中第一次出现的位置不是i，那么表示第i项是重复的，忽略掉。否则存入结果数组。
+<pre>
+function unique3(array){
+var n = [array[0]]; //结果数组
+//从第二项开始遍历
+for(var i = 1; i < array.length; i++) {
+    //如果当前数组的第i项在当前数组中第一次出现的位置不是i，
+    //那么表示第i项是重复的，忽略掉。否则存入结果数组
+    if (array.indexOf(array[i]) == i) n.push(array[i]);
+}
+return n;
+}
+
+ 	</pre>
+
+    <h3> 4.排序后相邻去除法</h3>
+	
+                虽然原生数组的"sort"方法排序结果不怎么靠谱，但在不注重顺序的去重里该缺点毫无影响。
+                实现思路：给传入数组排序，排序后相同值相邻，然后遍历时新数组只加入不与前一值重复的值。
+
+  <pre> 
+// 将相同的值相邻，然后去除
+function unique4(array){
+array.sort(); 
+var re=[array[0]];
+for(var i = 1; i < array.length; i++){
+    if( array[i] !== re[re.length-1])
+    {
+    re.push(array[i]);
+    }
+}
+return re;
+}
+</pre>
+
+
+               <h3> 5.优化遍历数组法</h3>
+
+   源自外国博文，该方法的实现代码相当酷炫；
+      实现思路：获取没重复的最右一值放入新数组。（检测到有重复值时终止当前循环同时进入顶层循环的下一轮判断）
+<pre> 
+// 思路：获取没重复的最右一值放入新数组
+function unique5(array){
+var r = [];
+for(var i = 0, l = array.length; i < l; i++) {
+    for(var j = i + 1; j < l; j++)
+    if (array[i] === array[j]) j = ++i;
+    r.push(array[i]);
+}
+return r;
+}
+</pre>

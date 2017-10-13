@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+　　<html>
+	 {% include head.html %}
+<body>
+	<!-- 顶部导航开始 -->
+	{% include navbar.html%}
+	<!--顶部导航结束-->
+<!--banner-->
+<!--banner结束-->
+	<div class="col-md-2 hidden-xs" id="toc" style="background: white;">
+		<h2>目录</h2>
+	</div>
+<div class=" feature container" id="content">
+	<div class="col-md-2" id="toc2"></div>
+    <div class="col-md-9 " id="easypage" style="padding: 0;">
+		<div id="easypage-con" style="background: white;">
+			{{ content }}
+		</div>	
+     </div>
+</div>
+		
+　　　　
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <script type="text/javascript">
+     	window.onload = function(){
+     		var ti = $("h3")
+     		for(i = 0;i<ti.length;i++){
+     			var  aa  = document.createElement('a');  
+	     		console.log(aa)
+	     		$("#toc").append(aa);
+	     		
+     		}
+     		var num = [];
+	     	for(var i = 0;i<ti.length;i++){
+//	     		var aa = $('<a></a>').text("111")
+				
+			//得到每个h3标签内的文字，加入到目录a标签内
+	     		var txt = $("h3")[i].innerHTML;
+	     	    $("#toc a")[i].innerHTML = txt;
+			//将获取到h3标签的高度存入数组中
+	     	    var top = $("h3")[i].offsetTop;
+	     	    num.push(top);
+	     	}
+			//设置点击事件
+	     	     $("#toc a").click(function(){
+	     	     	var index = $("#toc a").index(this)
+	     	    	$("body").scrollTop(num[index])
+	     	    })
+     	}
+     	
+     	
+
+
+     </script>
+　　</body>
+</html>
