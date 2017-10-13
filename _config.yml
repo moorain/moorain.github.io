@@ -1,3 +1,9 @@
 baseurl: /moorain.github.io
-
+# Build settings
+# highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  enable_coderay: true
+  syntax_highlighter: rouge
 excerpt_separator:  '<!-- more -->'
