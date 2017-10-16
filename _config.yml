@@ -7,3 +7,7 @@ kramdown:
   enable_coderay: true
   syntax_highlighter: rouge
 excerpt_separator:  '<!-- more -->'
+
+lean_cloud :
+  app_id   :  eiGoN5fUsNavY8styY25vM8P-gzGzoHsz
+  app_key  :  HSyHk7J2oPfNzBPs54O7dJm9
