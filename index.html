@@ -31,8 +31,10 @@ title: Moorain
 	</div>
 	<!--个人信息-->
 	<div class=" col-md-4" style="margin-top: 10px;">
+		
 		<div class="eassy">
 			<h2>文章分类</h2>
+			{% include date.html%}
 		{% for category in site.categories %}
 		<h3>{{ category | first }}</h3>
 		<!--<span>文章数量：</span></span>{{ category | last | size }}</span>-->
@@ -44,22 +46,8 @@ title: Moorain
 		    {% endfor %}
 		</ul>
 		{% endfor %}
-		</div>
-		
+		</div>	
 	</div>
 
-	<!--<div class="col-md-1" style="background: red;">
-		
-	</div>-->
-	<!--个人信息-->
-	<!--<div class="eassy col-md-3" style="text-align: center;">
-		<div class="bro">
-			<img src="img/header.jpg" width="100px" style="padding-top: 20px;">
-			<p>github</p>
-			<p>新浪微博</p>
-			<p>QQ</p>	
-		</div>
-		
-	</div>-->
 <!--</div>
 -->
