@@ -4,9 +4,6 @@ title: Moorain-list
 ---
 <!-- tag列表 -->
 <div class="panel panel-default tags" style="margin-bottom: 0;">
-	<!--<div class="panel-heading title">
-	  <h3>标签云</h3>
-	</div>-->
     <div class="panel-body list" id="tagslist">
         {% for tag in site.tags %}
             <a class="taglink" href="##" data-target-cate="#{{tag.first}}">
@@ -14,6 +11,7 @@ title: Moorain-list
             </a>
         {% endfor %}
     </div>
+    <p style="color: darkgray; font-size: 12px; padding-left: 30px;">注：本列表下文章并非全部原创，部份文章为网上收集并已标明出处，如有侵权，请联系我删除。</p>
 </div>
 <!--内容列表-->
 <div id="list">
