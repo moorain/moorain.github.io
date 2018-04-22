@@ -2,176 +2,315 @@
 title: Next Theme Tutorial
 description: NexT is a high quality elegant Jekyll theme ported from Hexo Next. It is crafted from scratch, with love.
 categories:
- - tutorial
+ - Node
 tags:
 ---
 
-> NexT is a high quality elegant [Jekyll](https://jekyllrb.com) theme ported from [Hexo Next](https://github.com/iissnan/hexo-theme-next). It is crafted from scratch, with love.
+### 基本概念 ###
 
-<!-- more -->
+**同步**：一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的。
 
-[Live Preview](http://simpleyyt.github.io/jekyll-theme-next/)
+	console.log(1111);
+	console.log(222);
+	
+	//后面的代码要等待前面的代码执行结束，于是产生了阻塞
+	for(var i=0;i<=9999999999;i++){
+		//
+	}
+	
+	console.log(3333);
+	console.log(444);
+这时，立即输出1111 222  不会立即执行后面的代码，**产生了阻塞**，后面的代码要等待前面的代码执行完成后才可以执行。
+图解：
 
-## Screenshots
+![](https://i.imgur.com/ad02ida.jpg)
 
-* Desktop
-![Desktop Preview](http://iissnan.com/nexus/next/desktop-preview.png)
+**异步： 一个任务不会等待上面的任务执行结束，就可以直接执行。**
+异步是怎么做的呢？
 
-* Sidebar
-
-![Desktop Sidebar Preview](http://iissnan.com/nexus/next/desktop-sidebar-preview.png)
-
-* Sidebar (Post details page)
-
-![Desktop Sidebar Preview](http://iissnan.com/nexus/next/desktop-sidebar-toc.png)
-
-* Mobile
-
-![Mobile Preview](http://iissnan.com/nexus/next/mobile.png)
-
-
-## Installation
-
-Check whether you have `Ruby 2.1.0` or higher installed:
-
-```sh
-ruby --version
-```
-
-Install `Bundler`:
-
-```sh
-gem install bundler
-```
-
-Clone Jacman theme:
-
-```sh
-git clone https://github.com/Simpleyyt/jekyll-theme-next.git
-cd jekyll-theme-next
-```
-
-Install Jekyll and other dependencies from the GitHub Pages gem:
-
-```sh
-bundle install
-```
-
-Run your Jekyll site locally:
-
-```sh
-bundle exec jekyll server
-```
-
-More Details：[Setting up your GitHub Pages site locally with Jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/)
+	console.log(1111);
+	console.log(222);
+	
+	//setTimeout()函数本身是同步的， 回调函数是异步的。
+	setTimeout(function(){
+		console.log(3333);
+	},1000);
+	
+	console.log(444);
 
 
-## Features
+执行结果：
 
-### Multiple languages support, including: English / Russian / French / German / Simplified Chinese / Traditional Chinese.
+	1111
+	222
+	444
+	3333
 
-Default language is English.
 
-```yml
-language: en
-# language: zh-Hans
-# language: fr-FR
-# language: zh-hk
-# language: zh-tw
-# language: ru
-# language: de
-```
+图解：
 
-Set `language` field as following in site `_config.yml` to change to Chinese.
+![](https://i.imgur.com/b7BpD43.jpg)
 
-```yml
-language: zh-Hans
-```
 
-### Comment support.
 
-NexT has native support for `DuoShuo` and `Disqus` comment systems.
+### 异步编程的实现 ###
 
-Add the following snippets to your `_config.yml`:
+NodeJS中共有三种编程方式：  
+**1、回调函数**  
+2、事件（基于回调）    
+3、Promise（ES6）    
 
-```yml
-duoshuo:
-  enable: true
-  shortname: your-duoshuo-shortname
-```
+#### 回调函数 ####
 
-OR
+一般的回调函数都是异步的，但是有一个例外：event;
+**这里对这个特殊情况做一个说明**：
+首先我们来看一段代码：
 
-```yml
-disqus_shortname: your-disqus-shortname
-```
+	console.log(1);
+	setTimeout(function(){//这里是异步的
+	    console.log(2);
+	},1000)
+	console.log(3);
+	console.log(4);
 
-### Social Media
+输出为 1，3，4，2
 
-NexT can automatically add links to your Social Media accounts:
+修改代码如下：
+	
+	var event=require('events');
+	var e=new event.EventEmitter();
+	
+	console.log(1);
+	setTimeout(function(){//这里是异步的
+	    console.log(2);
+	},1000)
+	
+	e.on('click',function(){ //特殊情况：这里的回调函数是同步触发的。
+		console.log('你触发了点击事件');
+	});
+	e.emit('click'); //同步触发
+	
+	console.log(3);
+	console.log(4);
 
-```yml
-social:
-  GitHub: your-github-url
-  Twitter: your-twitter-url
-  Weibo: your-weibo-url
-  DouBan: your-douban-url
-  ZhiHu: your-zhihu-url
-```
+输出结果：
 
-### Feed link.
+	1
+	你触发了点击事件
+	3
+	4
+	2
+	
+这里的click事件，是同步执行的。是因为**emit**的定义：**按照监听器的注册顺序，同步的调用每个注册到e上的监听器。**
+在这里是一个特殊情况，**这里的回调函数是同步触发的**。
 
-> Show a feed link.
 
-Set `rss` field in theme's `_config.yml`, as the following value:
+**接下来回到回调函数。**
 
-1. `rss: false` will totally disable feed link.
-2. `rss:  ` use sites' feed link. This is the default option.
+继续看：
 
-    Follow the installation instruction in the plugin's README. After the configuration is done for this plugin, the feed link is ready too.
+	console.log(1);
+	setTimeout(function(){//这里是异步的
+	    console.log(2);
+	},1000)
 
-3. `rss: http://your-feed-url` set specific feed link.
+	console.time('t1')
+		for(var i = 0;i<999999999;i++){}
+	console.timeEnd('t1')
+	
+	console.log(3);
+	console.log(4);
 
-### Up to 5 code highlight themes built-in.
+那么这里的console.time('t1')... console.timeEnd('t1')是同步的还是异步的呢？看结果：
 
-NexT uses [Tomorrow Theme](https://github.com/chriskempson/tomorrow-theme) with 5 themes for you to choose from.
-Next use `normal` by default. Have a preview about `normal` and `night`:
+	1
+	t1: 1406.332ms
+	3
+	4
+	2
 
-![Tomorrow Normal Preview](http://iissnan.com/nexus/next/tomorrow-normal.png)
-![Tomorrow Night Preview](http://iissnan.com/nexus/next/tomorrow-night.png)
+可以看到，里面的for循环是同步的，所以执行花了时间1406.332ms。
+那么有一个问题，setTimeout的时间为1000ms  时间比1406.332短，但是也没有在for循环之前执行。以为在执行的时候，必须要将同步的代码执行完后才去执行异步的代码。哪怕时间为0，结果也一样：
 
-Head over to [Tomorrow Theme](https://github.com/chriskempson/tomorrow-theme) for more details.
+	console.log(1);
+	setTimeout(function(){//这里是异步的
+	    console.log(2);
+	},0)
 
-## Configuration
+	console.time('t1')
+		for(var i = 0;i<999999999;i++){}
+	console.timeEnd('t1')
+	
+	console.log(3);
+	console.log(4);
+结果：
 
-NexT comes with few configurations.
+	1
+	t1: 1463.302ms
+	3
+	4
+	2
 
-```yml
 
-# Menu configuration.
-menu:
-  home: /
-  archives: /archives
+setTimeout、setInterval有一个默认时间，当设置的时间小于默认时间时，会自动设置为默认时间（**最小执行时间**）一般来说根据操作系统来区分：（在苹果机上的最小时间间隔是10毫秒，在Windows系统上的最小时间间隔大约是15毫秒）；
 
-# Favicon
-favicon: /favicon.ico
+执行流程： 
+ 1. 先打印出1  
+ 2. 执行setTimeout，由于是异步的代码，就不等待它执行完毕，继续执行下面的代码。
+ 3. 执行for循环代码，等待它执行完毕......执行完后执行下面的代码
+ 4. 执行打印出3
+ 5. 执行打印出4
+ 6. 再执行之前的异步代码，打印出2（同步代码执行完成才能执行异步的代码）
 
-# Avatar (put the image into next/source/images/)
-# can be any image format supported by web browsers (JPEG,PNG,GIF,SVG,..)
-avatar: /default_avatar.png
 
-# Code highlight theme
-# available: normal | night | night eighties | night blue | night bright
-highlight_theme: normal
 
-# Fancybox for image gallery
-fancybox: true
+图解（js的同步与异步工作流程）：
+![](https://i.imgur.com/k3vLIZb.jpg)
 
-# Specify the date when the site was setup
-since: 2013
 
-```
 
-## Browser support
 
-![Browser support](http://iissnan.com/nexus/next/browser-support.png)
+js会将所有回调函数（异步函数）放进**事件轮询表**，也可以理解为js的一个分支线程，代码在里面继续执行。
+**时间轮询机制：等同步的代码执行完成后，异步的代码才会执行。**
+
+#### 事件实现异步 ####
+
+上面说过事先异步，但其实事件也是基于回调函数的。
+创建一个有内容的data.txt，再任意创建一个33.js   
+
+	var fs=require('fs');//引入文件模块
+	var stream=fs.createReadStream('./data.txt');//创建一个读取流
+	onsole.log(1);
+	
+	//绑定data事件，当获取到数据时自动触发回调函数（异步）
+	stream.on('data',function(data){
+		console.log(data);
+	});
+	
+	console.log(2);
+	console.log(3);
+
+结果：
+
+	1
+	2
+	3
+	<Buffer ef bb bf e4 bd a0 e5 a5 bd e5 93 87 ef
+	 bc 81 e4 bd a0 e5 a5 bd e5 93 87 ef bc 81 e4 bd a0
+	 e5 a5 bd e5 93 87 ef bc 81 e4 bd a0 e5 a5 bd e5 93
+	 87 ef bc ... >
+
+
+可以看到1，2，3在前。因为data事件是异步的。
+
+### promise[es6] ###
+
+promise 是一个承诺对象（es6），用来传递异步操作的消息.
+有三个状态** pending、Resolved、Rejected **，代表了未来才知道结果的一个异步操作的值。
+
+有两个特征：
+**1、对象的状态不受外界影响**  
+2、一旦状态改变，就不会再变  
+	pending => Resolved（成功）  
+	pending => Rejected（失败）  
+Promise 构造函数接受一个函数作为参数，该函数的两个参数分别是 resolve 方法和 reject 方法。
+如果异步操作成功，则用 resolve 方法将 Promise 对象的状态，从「未完成」变为「成功」（即从 pending 变为 resolved）；  
+如果异步操作失败，则用 reject 方法将 Promise 对象的状态，从「未完成」变为「失败」（即从 pending 变为 rejected）。  
+
+看以下代码： 
+创建两个txt文件：file1.txt   file2.txt。 
+
+**readFile（path[,options],callback（err,data）{}）**读取文件方法。
+
+//抛出问题：将两个文件读取的结果按先后顺序拼接起来。
+	var fs=require('fs');
+	
+	fs.readFile('./file1.txt',function(err,data){
+		console.log(data.toString());
+	});
+
+	fs.readFile('./file2.txt',function(err,data){
+		console.log(data.toString());
+	});
+
+异步有一个严重的问题，**返回值无法预料先后顺序**。  无法进行精确控制。
+那么如果要对先后进行处理该怎么做呢？
+
+那么就引入了promise用来解决这个问题。
+
+那怎么解决呢？
+先将两个拼接成一个完整的结果。
+
+	var fs=require('fs');
+	var str='';
+	
+	fs.readFile('./file1.txt',function(err,data){
+		//console.log(data.toString());
+		str+=data.toString();
+	});
+	
+	fs.readFile('./file2.txt',function(err,data){
+		//console.log(data.toString());
+		str+=data.toString();
+	});
+	
+	console.log(str);//打印结果没有值。因为没有返回值。
+
+因为console.log(str);为同步代码，在执行的时候异步代码还没有返回值。
+
+这久是遇到的异步的问题，结果无法控制。那么怎么控制？使用promise;
+
+代码如下:
+
+用promise将读取代码封装起来,这是固定写法,file2同上.
+
+代码如下:
+
+	var fs=require('fs');
+	var str = '';
+
+	var p1=new Promise(function(resolve,reject){
+		fs.readFile('./file1.txt',function(err,data){
+			if(err){
+				reject(err); //将 pending状态转成 rejected状态
+			}else{
+				resolve(data.toString()); //从 pending状态转成 resolved状态
+			}
+		});
+	});
+	
+	var p2=new Promise(function(resolve,reject){
+		fs.readFile('./file2.txt',function(err,data){
+			if(err){
+				reject(err); //将 pending状态转成 rejected状态
+			}else{
+				resolve(data.toString()); //从 pending状态转成 resolved状态
+			}
+		});
+	});
+	
+
+
+1. Promise.all()方法:**指当所有在可迭代参数中的 promises 已完成，或者第一个传递的 promise（指 reject）失败时，返回 promise**。
+
+
+2. **promise.then(onCompleted, onRejected);**:允许你指定实现承诺时要完成的工作。  
+	promise  必需。Promise 对象。  
+	onCompleted  必需。承诺成功完成时要运行的履行处理程序函数。  
+	onRejected  可选。承诺被拒绝时要运行的错误处理程序函数。
+
+
+将前面两个Promise对象获得的结果进行统一的处理，便于很好的控制异步产生的结果:
+
+	Promise.all([p1,p2]).then(function(data){
+		console.log(data[0]+data[1]);
+	},function(){});
+
+p1,p2定好了顺序,data是一个数组.
+
+
+
+
+
+
+
