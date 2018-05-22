@@ -60,7 +60,7 @@ defaults:
 
 # Atom feed
 feed:
-  path: atom.xml
+  path: https://github.com/moorain/moorain.github.io
 
 # Plugins
 ## Docs: https://help.github.com/articles/configuring-jekyll-plugins/
@@ -83,7 +83,7 @@ keywords: "Jekyll, Moorain"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+Git:
 
 # Specify the date when the site was setup
 #since: 2015
@@ -226,7 +226,7 @@ social_icons:
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
-  Twitter: twitter
+  # Twitter: twitter
   Weibo: weibo
 
 
