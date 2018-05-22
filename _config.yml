@@ -6,7 +6,7 @@
 # Site
 title: Moorain
 subtitle:
-description: this is my blog!
+description: 永远保持谦卑，永远奋不顾身。
 author: Moorain
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
@@ -256,7 +256,7 @@ toc:
 sidebar:
   # Sidebar Position, available value: left | right
   # position: left
-  position: right
+  position: left
 
   # Sidebar Display, available value:
   #  - post    expand on posts automatically. Default.
