@@ -127,3 +127,14 @@
     padding-right: 260px;
   }
 }
+
+.sidebar-position-left {
+  .header-inner { right: 0; }
+  .content-wrap { float: right; }
+  .sidebar { float: left; }
+
+  .footer-inner {
+    padding-right: 0;
+    padding-left: 260px;
+  }
+}
