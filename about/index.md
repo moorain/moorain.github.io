@@ -1,6 +1,6 @@
 ---
 layout: page
-type: share
+type: about
 ---
 
 Building...
