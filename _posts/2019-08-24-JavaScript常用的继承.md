@@ -1,6 +1,6 @@
 ---
 layout: post
-title:JavaScript常用的继承
+title: JavaScript常用的继承
 date: 2019-08-24 23:30:26
 description: JavaScript常用的继承。
 categories:
